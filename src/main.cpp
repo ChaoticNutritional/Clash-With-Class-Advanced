@@ -33,8 +33,6 @@ int main()
     Enemy slime1(Vector2{800.f, 800.f}, LoadTexture("characters/slime_idle_spritesheet.png"), LoadTexture("characters/slime_run_spritesheet.png"));
     Enemy slime2(Vector2{1000.f, 1000.f}, LoadTexture("characters/slime_idle_spritesheet.png"), LoadTexture("characters/slime_run_spritesheet.png"));
 
-    
-
     Enemy *enemies[]{
         &goblin,
         &slime,
@@ -45,7 +43,6 @@ int main()
     {
         enemy->setTarget(&knight);
     }
-
 
 
     SetTargetFPS(60);
