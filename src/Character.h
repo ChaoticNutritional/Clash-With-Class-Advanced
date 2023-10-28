@@ -12,7 +12,7 @@ class Character : public BaseCharacter
         virtual Vector2 GetScreenPos() override;
         Rectangle getWeaponRect() {return weaponCollisionRec;};
         float GetHealth() const { return health; };
-        void TakeDamage(float damage, float deltaTime);
+        void TakeDamage(float damage);
         bool damaged = false;
     private:
         Rectangle weaponCollisionRec{};

@@ -109,7 +109,7 @@ void Character::TakeDamage(float damage)
     damaged = true;
     health -= damage;
 
-    float timeSum = 3.0f
+    float timeSum = 3.0f;
 
     if (health <= 0.f)
     {
