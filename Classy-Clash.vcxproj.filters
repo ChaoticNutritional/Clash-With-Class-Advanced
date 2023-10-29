@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Image Include="characters\goblin_idle_spritesheet.png">
+      <Filter>Resource FIles\characters</Filter>
+    </Image>
+    <Image Include="characters\goblin_run_spritesheet.png">
+      <Filter>Resource FIles\characters</Filter>
+    </Image>
+    <Image Include="characters\knight_idle_spritesheet.png">
+      <Filter>Resource FIles\characters</Filter>
+    </Image>
+    <Image Include="characters\knight_run_spritesheet.png">
+      <Filter>Resource FIles\characters</Filter>
+    </Image>
+    <Image Include="characters\slime_idle_spritesheet.png">
+      <Filter>Resource FIles\characters</Filter>
+    </Image>
+    <Image Include="characters\slime_run_spritesheet.png">
+      <Filter>Resource FIles\characters</Filter>
+    </Image>
+    <Image Include="characters\weapon_sword.png">
+      <Filter>Resource FIles\characters</Filter>
+    </Image>
+    <Image Include="characters\weapon_sword_1.png">
+      <Filter>Resource FIles\characters</Filter>
+    </Image>
+    <Image Include="nature_tileset\Bush.png">
+      <Filter>Resource FIles\nature_tileset</Filter>
+    </Image>
+    <Image Include="nature_tileset\Log.png">
+      <Filter>Resource FIles\nature_tileset</Filter>
+    </Image>
+    <Image Include="nature_tileset\OpenWorldMap24x24.png">
+      <Filter>Resource FIles\nature_tileset</Filter>
+    </Image>
+    <Image Include="nature_tileset\Rock.png">
+      <Filter>Resource FIles\nature_tileset</Filter>
+    </Image>
+    <Image Include="nature_tileset\Sign.png">
+      <Filter>Resource FIles\nature_tileset</Filter>
+    </Image>
+    <Image Include="nature_tileset\WorldMap.png">
+      <Filter>Resource FIles\nature_tileset</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{90115bef-a870-46d7-959a-6db23787f792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{647c07c2-b7c1-465c-a50c-89ed421fea14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource FIles">
+      <UniqueIdentifier>{9051b55e-6054-40cc-b6db-61281012cc24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource FIles\characters">
+      <UniqueIdentifier>{69a020d3-5003-45c9-b1de-7c80be7b696e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource FIles\nature_tileset">
+      <UniqueIdentifier>{f2d6b221-e117-42fd-90e6-95d469db2a31}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseCharacter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Prop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseCharacter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Prop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

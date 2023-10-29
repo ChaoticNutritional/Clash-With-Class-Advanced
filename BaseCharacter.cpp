@@ -63,8 +63,6 @@ void BaseCharacter::Tick(float deltaTime)
         currentTexture = idle;
     }
 
-
-
     velocity = {};
 
     // Draw

@@ -99,7 +99,7 @@ void Character::Tick(float deltaTime)
     // DrawText(TextFormat("pos: %f %f", worldPos.x, worldPos.y), 0.f, 0.f, 33.f, RED);
 }
 
-void Character::TakeDamage(float damage, float deltaTime)
+void Character::TakeDamage(float damage, float deltaTime = 0.0f)
 {
     damaged = true;
     health -= damage;

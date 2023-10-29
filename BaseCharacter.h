@@ -7,7 +7,7 @@ class BaseCharacter
 {
     public:
         BaseCharacter();
-        Vector2 GetWorldPos() { return worldPos; }
+        Vector2 GetWorldPos() { return worldPos; };
         void SetActiveTexture(Texture2D);
         void undoMovement();
         Rectangle GetCollisionRec();
@@ -36,9 +36,6 @@ class BaseCharacter
         //Color attacking{255, 255, 255, 255}; 
         Color currentColor = normalColor;
         
-
-        
-
         // Animation variables
         float runningTime{};
         int frame{};
@@ -48,8 +45,6 @@ class BaseCharacter
         float speed{};
 
         Vector2 velocity{};
-
-    private:
         bool alive{true};
         
 };
