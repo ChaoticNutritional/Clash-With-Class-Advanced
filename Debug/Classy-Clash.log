@@ -1,0 +1,41 @@
+﻿  BaseCharacter.cpp
+  Character.cpp
+  Enemy.cpp
+  Prop.cpp
+  main.cpp
+C:\Clash-With-Class-Advanced\main.cpp(72,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(72,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(146,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(146,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(148,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(149,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(150,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+BaseCharacter.obj : error LNK2019: unresolved external symbol __imp__LoadTexture referenced in function "public: __thiscall BaseCharacter::BaseCharacter(void)" (??0BaseCharacter@@QAE@XZ)
+Character.obj : error LNK2001: unresolved external symbol __imp__LoadTexture
+main.obj : error LNK2001: unresolved external symbol __imp__LoadTexture
+BaseCharacter.obj : error LNK2019: unresolved external symbol __imp__UnloadTexture referenced in function "public: void __thiscall BaseCharacter::unloadAllTexts(void)" (?unloadAllTexts@BaseCharacter@@QAEXXZ)
+main.obj : error LNK2001: unresolved external symbol __imp__UnloadTexture
+BaseCharacter.obj : error LNK2019: unresolved external symbol __imp__DrawTexturePro referenced in function "public: virtual void __thiscall BaseCharacter::Tick(float)" (?Tick@BaseCharacter@@UAEXM@Z)
+Character.obj : error LNK2001: unresolved external symbol __imp__DrawTexturePro
+Character.obj : error LNK2019: unresolved external symbol __imp__IsKeyDown referenced in function "public: virtual void __thiscall Character::Tick(float)" (?Tick@Character@@UAEXM@Z)
+Character.obj : error LNK2019: unresolved external symbol __imp__IsMouseButtonDown referenced in function "public: virtual void __thiscall Character::Tick(float)" (?Tick@Character@@UAEXM@Z)
+Character.obj : error LNK2019: unresolved external symbol __imp__GetMousePosition referenced in function "public: virtual void __thiscall Character::Tick(float)" (?Tick@Character@@UAEXM@Z)
+Enemy.obj : error LNK2019: unresolved external symbol __imp__GetFrameTime referenced in function "public: virtual void __thiscall Enemy::Tick(float)" (?Tick@Enemy@@UAEXM@Z)
+main.obj : error LNK2001: unresolved external symbol __imp__GetFrameTime
+Enemy.obj : error LNK2019: unresolved external symbol __imp__CheckCollisionRecs referenced in function "public: virtual void __thiscall Enemy::Tick(float)" (?Tick@Enemy@@UAEXM@Z)
+main.obj : error LNK2001: unresolved external symbol __imp__CheckCollisionRecs
+main.obj : error LNK2019: unresolved external symbol __imp__InitWindow referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__WindowShouldClose referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__ClearBackground referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__BeginDrawing referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__EndDrawing referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__SetTargetFPS referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__IsMouseButtonPressed referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__DrawRectangle referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__DrawTextureEx referenced in function _main
+Prop.obj : error LNK2001: unresolved external symbol __imp__DrawTextureEx
+main.obj : error LNK2019: unresolved external symbol __imp__DrawText referenced in function _main
+main.obj : error LNK2019: unresolved external symbol __imp__TextFormat referenced in function _main
+C:\vcpkg\packages\raylib_x64-windows\lib\raylib.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\jackt\source\repos\Classy-Clash\Debug\Classy-Clash.exe : fatal error LNK1120: 19 unresolved externals

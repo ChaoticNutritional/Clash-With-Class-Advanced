@@ -1,3 +1,4 @@
 *.exe
 *.dsym
+*.DS_Store
 main

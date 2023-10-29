@@ -1,6 +1,8 @@
 #include "Enemy.h"
 #include "raymath.h"
 
+int Enemy::enemyCount;
+
 Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture)
 {
     worldPos = pos;
@@ -10,11 +12,11 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture)
     width = currentTexture.width / maxFrames;
     height = currentTexture.height;
     speed = 3.f;
+    Enemy::enemyCount++;
 }
 
 void Enemy::Tick(float deltaTime)
 {
-    if(!getAlive()) return;
     // get toTarget/
     velocity = Vector2Subtract(target->GetScreenPos(), GetScreenPos());
 
@@ -22,7 +24,7 @@ void Enemy::Tick(float deltaTime)
     if(Vector2Length(velocity) < chaseRadius)
     {
         velocity = {};
-        // turn white, then attack
+        // IMPLEMENTATION FOR LATER: Change Color: Attack lunge
     }
 
     BaseCharacter::Tick(deltaTime);

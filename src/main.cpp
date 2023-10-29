@@ -4,6 +4,9 @@
 #include "Prop.h"
 #include "Enemy.h"
 #include <string>
+#include <iostream>
+#include <stdio.h>
+#include <vector>
 
 // MAIN BEGINS
 int main()
@@ -28,12 +31,15 @@ int main()
 
     // create a goblin
     Enemy goblin(Vector2{0.f, 0.f}, LoadTexture("characters/goblin_idle_spritesheet.png"), LoadTexture("characters/goblin_run_spritesheet.png"));
-
     Enemy slime(Vector2{500.f, 500.f}, LoadTexture("characters/slime_idle_spritesheet.png"), LoadTexture("characters/slime_run_spritesheet.png"));
     Enemy slime1(Vector2{800.f, 800.f}, LoadTexture("characters/slime_idle_spritesheet.png"), LoadTexture("characters/slime_run_spritesheet.png"));
     Enemy slime2(Vector2{1000.f, 1000.f}, LoadTexture("characters/slime_idle_spritesheet.png"), LoadTexture("characters/slime_run_spritesheet.png"));
 
-    Enemy *enemies[]{
+    std::cout << slime2.enemyCount << std::endl;
+
+    
+
+    std::vector<Enemy*> enemies = {
         &goblin,
         &slime,
         &slime1,
@@ -45,11 +51,11 @@ int main()
     }
 
 
+
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
         // Drawing begins
-        //
         BeginDrawing();
         ClearBackground(WHITE);
 
@@ -98,48 +104,48 @@ int main()
         }
 
         // move enemies
-        for (int i = 0; i < sizeof(enemies) / sizeof(enemies[0]); i++)
+        for (int i = 0; i < enemies.size(); i++)
         {
-            enemies[i]->Tick(GetFrameTime());
+            enemies.at(i)->Tick(GetFrameTime());
 
-        // PLEASE OPTIMIZE THIS WHOLE SECTION:(
-            for (int j = 0; j < sizeof(enemies) / sizeof(enemies[0]); j++)
-            {
-
-                if (i == j) continue;
-                // check if enemy collides into any other enemies
-                if (i < sizeof(enemies) / sizeof(enemies[0]) - 1)
-                {
-                    if (CheckCollisionRecs(enemies[i]->GetCollisionRec(), enemies[j]->GetCollisionRec()))
-                    {
-                        enemies[i]->undoMovement();
-                    }
-                }
-                // check for last enemy in array
-                else
-                {
-                    if (CheckCollisionRecs(enemies[i]->GetCollisionRec(), enemies[j]->GetCollisionRec()))
-                    {
-                        enemies[i]->undoMovement();
-                        // DrawText("POO", knight.GetScreenPos().x, knight.GetScreenPos().y, 22, BLUE);
-                    }
-                }
-            }
+        //// NOTE PLEASE OPTIMIZE THIS WHOLE SECTION :(
+        //    for (int j = 0; j < enemies.size(); j++)
+        //    {
+        //        if (i == j) continue;
+        //        // check if enemy collides into any other enemies
+        //        if (i < sizeof(enemies) / sizeof(enemies[0]) - 1)
+        //        {
+        //            if (CheckCollisionRecs(enemies[i]->GetCollisionRec(), enemies[j]->GetCollisionRec()))
+        //            {
+        //                enemies[i]->undoMovement();
+        //            }
+        //        }
+        //        // check for last enemy in array
+        //        else
+        //        {
+        //            if (CheckCollisionRecs(enemies[i]->GetCollisionRec(), enemies[j]->GetCollisionRec()))
+        //            {
+        //                enemies[i]->undoMovement();
+        //                // DrawText("FOO", knight.GetScreenPos().x, knight.GetScreenPos().y, 22, BLUE);
+        //            }
+        //        }
+        //    }
         }
 
         // knight attack
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            for (auto enemy : enemies)
-            {
-                if (CheckCollisionRecs(enemy->GetCollisionRec(), knight.getWeaponRect()))
-                {
-                    enemy->setAlive(false);
-                }
-            }
+            // removing an enemy from the vector
+            enemies.erase(std::remove_if(
+                enemies.begin(),
+                enemies.end(),
+                // lambda function to check if the sword hits enemy at index in list
+                [&knight](Enemy* enemy) { return CheckCollisionRecs(enemy->GetCollisionRec(), knight.getWeaponRect()); }
+                ), enemies.end());
         }
+        DrawText(TextFormat("%.i enemies remain", enemies.size()), knight.GetScreenPos().x, knight.GetScreenPos().y, 22, BLUE);
 
-        // Health Bar!
+        // Health Bar NEEDS OPTIMIZATION
         DrawRectangle(15, 15, 250.f, 60.f, GOLD);
         DrawRectangle(20, 20, 240, 50, BLACK);
         DrawRectangle(20, 20, (knight.GetHealth() * 240) / 100, 50, RED);
@@ -148,9 +154,9 @@ int main()
         DrawText(TextFormat("%.f/100", knight.GetHealth()), 82, 31, 35, GRAY);
         DrawText(TextFormat("%.f/100", knight.GetHealth()), 80, 30, 35, WHITE);
 
-        EndDrawing();
+        
 
-        // GetPixelColor()
+        EndDrawing();
     }
     knight.unloadAllTexts();
     // goblin.unloadAllTexts();

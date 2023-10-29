@@ -1,0 +1,13 @@
+﻿  Enemy.cpp
+  main.cpp
+C:\Clash-With-Class-Advanced\main.cpp(75,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(75,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(146,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(146,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(149,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(149,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(151,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(152,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Clash-With-Class-Advanced\main.cpp(153,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Classy-Clash.vcxproj -> C:\Clash-With-Class-Advanced\x64\Debug\Classy-Clash.exe

@@ -1,8 +1,6 @@
 #include "Character.h"
 #include "raylib.h"
 
-float timeSum{};
-
 Character::Character(int windowWidth, int windowHeight) : winWidth(windowWidth),
                                                           winHeight(windowHeight)
 {
@@ -19,7 +17,6 @@ Vector2 Character::GetScreenPos()
         static_cast<float>(winHeight) / 2 - (scale * .5f * height)};
 }
 
-
 void Character::Tick(float deltaTime)
 {
     // check if dead
@@ -34,24 +31,12 @@ void Character::Tick(float deltaTime)
         velocity.y -= 1.0;
     if (IsKeyDown(KEY_S))
         velocity.y += 1.0;
-    
-    if (timeSum > 0.f)
-    {
-        timeSum -= deltaTime;
-        currentColor = hurtColor;
-    }
-
-    else 
-    {
-        currentColor = normalColor;
-    }
-
     BaseCharacter::Tick(deltaTime);
 
     GetMousePosition().x < GetScreenPos().x + static_cast<float>(currentTexture.width) / 2.f ? RightLeft = -1.f : RightLeft = 1.f;
 
     // Debugging mouse pos
-    // DrawCircle(GetMousePosition().x, GetMousePosition().y, 10.f, RED);
+    //DrawCircle(GetMousePosition().x, GetMousePosition().y, 10.f, RED);
 
     Vector2 origin{0.f, 0.f};
     Vector2 offset{0.f, 0.f};
@@ -102,18 +87,31 @@ void Character::Tick(float deltaTime)
         weapon.height * scale};
 
     DrawTexturePro(weapon, source, dest, origin, rotation, WHITE);
+
+    /*DrawRectangleLines(
+        weaponCollisionRec.x,
+        weaponCollisionRec.y,
+        weaponCollisionRec.width,
+        weaponCollisionRec.height,
+        RED);*/
+
+    // debugging knight's position on the screen displayed
+    // DrawText(TextFormat("pos: %f %f", worldPos.x, worldPos.y), 0.f, 0.f, 33.f, RED);
 }
 
-void Character::TakeDamage(float damage)
+void Character::TakeDamage(float damage, float deltaTime = 0.0f)
 {
     damaged = true;
     health -= damage;
 
-    float timeSum = 3.0f;
+    if(damaged)
+    {
+        currentColor = normalColor;
+        damaged = false;
+    }
 
     if (health <= 0.f)
     {
         setAlive(false);
     }
 }
-
