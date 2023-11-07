@@ -19,6 +19,10 @@ This program makes use of the [Raylib library](https://www.raylib.com/) which pa
     - Perform charge animation. Towards the end of charge time, enemy will store a reference to the player's position in world space
     - Will dash at faster speed towards locked location of player
     - Return to chase after brief pause
+   
+- Localized character checking
+  - Currently there are several instances where we check for collisions of objects regardless of their proximity, such as when the player "attacks", we check if the sword collision rec overlaps with an enemy collision rec. This is unnecessary if we created a localized check first in a grid system based on where the character is currently. If we only check entities who exist in a set of nearby grid squares to the character, we can optimize these collision checks.
+  - To do this, my plan is to implement a mapwide grid for testing and detection of where the player is. We can then check the adjacent grid squares for enemies or other collide-ables. Any objects not present in adjacent squares can be ignored from checks.
 
 ## The Program explained
 
