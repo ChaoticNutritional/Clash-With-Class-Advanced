@@ -17,7 +17,7 @@ This program makes use of the [Raylib library](https://www.raylib.com/) which pa
   - Currently enemies produce continuous damage when contact is made with the player. When finished with current changes enemy behavior should produce the following: (Please excuse nebulous language)
     - Enemies will reach acceptable follow radius distance
     - Perform charge animation. Towards the end of charge time, enemy will store a reference to the player's position in world space
-    - Eill dash at faster speed towards locked location of player
+    - Will dash at faster speed towards locked location of player
     - Return to chase after brief pause
 
 ## The Program explained
