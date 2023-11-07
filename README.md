@@ -5,6 +5,8 @@ Additionally, as I progressed in my studies at formal education institutions, I 
 
 This program makes use of the [Raylib library](https://www.raylib.com/) which packages a number of core libraries that support graphics, audio tools, and vector mathematics into a single source.
 
+Initially this program was created in VSCode, but I have since migrated it into development in Visual Studio 2019 (hence the branch name) which is now the primary build going forwards.
+
 ## TODO
 
 - Invincible time & color flash
