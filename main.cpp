@@ -8,6 +8,18 @@
 #include <stdio.h>
 #include <vector>
 
+
+// fun but inefficient... read documentation of RLAPI for better alternative
+void DrawPlayerHealth(Character knight) {
+    DrawRectangle(15, 15, 250.f, 60.f, GOLD);
+    DrawRectangle(20, 20, 240, 50, BLACK);
+    DrawRectangle(20, 20, (knight.GetHealth() * 240) / 100, 50, RED);
+    DrawRectangle(20, 60, ((knight.GetHealth() * 240) / 100), 10, Color{ 200, 0, 0, 255 });
+    DrawRectangle(20, 20, ((knight.GetHealth() * 240) / 100), 5, Color{ 255, 100, 100, 255 });
+    DrawText(TextFormat("%.f/100", knight.GetHealth()), 82, 31, 35, GRAY);
+    DrawText(TextFormat("%.f/100", knight.GetHealth()), 80, 30, 35, WHITE);
+}
+
 // MAIN BEGINS
 int main()
 {
@@ -29,16 +41,26 @@ int main()
         Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")},
     };
 
-    // create a goblin
-    Enemy goblin(Vector2{0.f, 0.f}, LoadTexture("characters/goblin_idle_spritesheet.png"), LoadTexture("characters/goblin_run_spritesheet.png"));
-    Enemy slime(Vector2{500.f, 500.f}, LoadTexture("characters/slime_idle_spritesheet.png"), LoadTexture("characters/slime_run_spritesheet.png"));
-    Enemy slime1(Vector2{800.f, 800.f}, LoadTexture("characters/slime_idle_spritesheet.png"), LoadTexture("characters/slime_run_spritesheet.png"));
-    Enemy slime2(Vector2{1000.f, 1000.f}, LoadTexture("characters/slime_idle_spritesheet.png"), LoadTexture("characters/slime_run_spritesheet.png"));
+    // enemy textures paired with running, would be better to use different data structure? for now testing this solution
+    std::vector<Texture2D> enemyTextures
+    { 
+        LoadTexture("characters/goblin_idle_spritesheet.png"), LoadTexture("characters/goblin_run_spritesheet.png"),
+        LoadTexture("characters/slime_idle_spritesheet.png") , LoadTexture("characters/slime_run_spritesheet.png"),
+    };
 
-    std::cout << slime2.enemyCount << std::endl;
-
+    // location generator
+    //TODO
     
+    // Initializiation of enemies can occur while game runs, to add new guys after game start
+    // I don't want to have to specify one and the one after... ideate on solution for this
+    Enemy goblin(Vector2{0.f, 0.f}, enemyTextures.at(0), enemyTextures.at(1));
 
+    // todo: find way to define a slime enemy will always use those two textures as idle and run
+    Enemy slime(Vector2{500.f, 500.f}, enemyTextures.at(2), enemyTextures.at(3));
+    Enemy slime1(Vector2{800.f, 800.f}, enemyTextures.at(2), enemyTextures.at(3));
+    Enemy slime2(Vector2{1000.f, 1000.f}, enemyTextures.at(2), enemyTextures.at(3));
+
+    // using vector here to add enemies later
     std::vector<Enemy*> enemies = {
         &goblin,
         &slime,
@@ -49,8 +71,6 @@ int main()
     {
         enemy->setTarget(&knight);
     }
-
-
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -76,13 +96,6 @@ int main()
             EndDrawing();
             continue;
         }
-        else // Character is alive
-        {
-            // OUTDATED HEALTH DISPLAY
-                // std::string knightHealth = "Health: ";
-                // knightHealth.append(std::to_string(knight.GetHealth()), 0, 5);
-                // DrawText(knightHealth.c_str(), 55.f, 45.f, 40, RED);
-        }
 
         // check map bounds
         knight.Tick(GetFrameTime());
@@ -107,30 +120,8 @@ int main()
         for (int i = 0; i < enemies.size(); i++)
         {
             enemies.at(i)->Tick(GetFrameTime());
-
-        //// NOTE PLEASE OPTIMIZE THIS WHOLE SECTION :(
-        //    for (int j = 0; j < enemies.size(); j++)
-        //    {
-        //        if (i == j) continue;
-        //        // check if enemy collides into any other enemies
-        //        if (i < sizeof(enemies) / sizeof(enemies[0]) - 1)
-        //        {
-        //            if (CheckCollisionRecs(enemies[i]->GetCollisionRec(), enemies[j]->GetCollisionRec()))
-        //            {
-        //                enemies[i]->undoMovement();
-        //            }
-        //        }
-        //        // check for last enemy in array
-        //        else
-        //        {
-        //            if (CheckCollisionRecs(enemies[i]->GetCollisionRec(), enemies[j]->GetCollisionRec()))
-        //            {
-        //                enemies[i]->undoMovement();
-        //                // DrawText("FOO", knight.GetScreenPos().x, knight.GetScreenPos().y, 22, BLUE);
-        //            }
-        //        }
-        //    }
         }
+
 
         // knight attack
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -143,22 +134,18 @@ int main()
                 [&knight](Enemy* enemy) { return CheckCollisionRecs(enemy->GetCollisionRec(), knight.getWeaponRect()); }
                 ), enemies.end());
         }
+
+        // Debugging to make sure that enemies alive tracking properly
         DrawText(TextFormat("%.i enemies remain", enemies.size()), knight.GetScreenPos().x, knight.GetScreenPos().y, 22, BLUE);
 
-        // Health Bar NEEDS OPTIMIZATION
-        DrawRectangle(15, 15, 250.f, 60.f, GOLD);
-        DrawRectangle(20, 20, 240, 50, BLACK);
-        DrawRectangle(20, 20, (knight.GetHealth() * 240) / 100, 50, RED);
-        DrawRectangle(20, 60, ((knight.GetHealth() * 240) / 100), 10, Color{200, 0, 0, 255});
-        DrawRectangle(20, 20, ((knight.GetHealth() * 240) / 100), 5, Color{255, 100, 100, 255});
-        DrawText(TextFormat("%.f/100", knight.GetHealth()), 82, 31, 35, GRAY);
-        DrawText(TextFormat("%.f/100", knight.GetHealth()), 80, 30, 35, WHITE);
+        // Stylized Health Bar NEEDS OPTIMIZATION
+        DrawPlayerHealth(knight);
 
-        
+        // Win game state
+        // Vector is empty
 
         EndDrawing();
     }
     knight.unloadAllTexts();
-    // goblin.unloadAllTexts();
     UnloadTexture(mapBG);
 }

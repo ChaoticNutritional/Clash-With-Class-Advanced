@@ -8,19 +8,38 @@
 class Enemy : public BaseCharacter
 {
     public:
-        Enemy(Vector2 pos, Texture idle_texture, Texture2D run_texture);
+        Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture);
         virtual void Tick(float deltaTime) override;
         virtual Vector2 GetScreenPos() override;
-        // keep track of the number of enemies remaining 
+        // keep track of the number of enemies remaining, static so that it can be shared across all enemy objects
         static int enemyCount;
         void setTarget(Character* aGuy) { target = aGuy; }
-
-
+        void TickChase(float deltaTime);
+        void TickDash(float deltaTime);
+        void StartDash();
     
     private:
         Character* target;
         float DPS{10.f};
-        float chaseRadius{20.f};
+
+        // distance from self to target
+        float chaseRadius{100.f};
+
+        // counts down until the enemy will dash once within range
+        float counter = 2.f;
+
+
+        // TEST
+        // implementation of state machine
+        enum class EnemyState {
+            Idle,
+            Chasing,
+            Dashing,
+        };
+
+        EnemyState currentState;
+        float dashCounter;
+        Vector2 lastKnownPosition;
 };
 
 #endif

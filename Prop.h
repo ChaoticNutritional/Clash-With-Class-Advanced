@@ -13,6 +13,4 @@ class Prop
         Texture2D texture{};
         Vector2 onScreenPos{};
         float scale{4.f};
-
-    
 };

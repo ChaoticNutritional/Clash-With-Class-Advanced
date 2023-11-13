@@ -8,7 +8,6 @@ class BaseCharacter
     public:
         BaseCharacter();
         Vector2 GetWorldPos() { return worldPos; };
-        void SetActiveTexture(Texture2D);
         void undoMovement();
         Rectangle GetCollisionRec();
         virtual void Tick(float deltaTime);

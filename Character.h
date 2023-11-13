@@ -12,8 +12,8 @@ class Character : public BaseCharacter
         virtual Vector2 GetScreenPos() override;
         Rectangle getWeaponRect() {return weaponCollisionRec;};
         float GetHealth() const { return health; };
+
         void TakeDamage(float damage, float deltaTime = 0.0f);
-        bool damaged = false;
     private:
         Rectangle weaponCollisionRec{};
         int winWidth{};

@@ -49,17 +49,14 @@ void BaseCharacter::Tick(float deltaTime)
     // if direction is nonzero, move
     if (Vector2Length(velocity) != 0.0)
     {
-        // knight is running
         worldPos = Vector2Add(worldPos, Vector2Scale(Vector2Normalize(velocity), speed));
 
         velocity.x < 0.f ? RightLeft = -1.f : RightLeft = 1.f;
 
-        // knight is running
         currentTexture = run;
     }
     else
     {
-        // knight is still
         currentTexture = idle;
     }
 
