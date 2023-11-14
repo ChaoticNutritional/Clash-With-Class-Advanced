@@ -30,16 +30,17 @@ class BaseCharacter
         // facing value, -1 or 1
         float RightLeft{1.0f};
         bool damaged{false};
+
+        // these three vars are in an attempt to adust the color of all pixels in a 2D texture, experimental, currently not in use
         Color hurtColor{RED};
         Color normalColor{WHITE};
-        //Color attacking{255, 255, 255, 255}; 
         Color currentColor = normalColor;
         
         // Animation variables
-        float runningTime{};
+        float runningTime{}; // maybe rename this variable for clarity after coming back to this program
         int frame{};
         const int maxFrames{6};
-        const float updateTime{1.f / 12.f};
+        float updateTime{1.f / 12.f};
 
         float speed{};
 

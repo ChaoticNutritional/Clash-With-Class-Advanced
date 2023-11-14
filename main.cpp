@@ -48,29 +48,32 @@ int main()
         LoadTexture("characters/slime_idle_spritesheet.png") , LoadTexture("characters/slime_run_spritesheet.png"),
     };
 
-    // location generator
+
     //TODO
-    
-    // Initializiation of enemies can occur while game runs, to add new guys after game start
+        // location generator
+        // Initializiation of enemies can occur while game runs, to add new guys after game start
+
     // I don't want to have to specify one and the one after... ideate on solution for this
-    Enemy goblin(Vector2{0.f, 0.f}, enemyTextures.at(0), enemyTextures.at(1));
+    Enemy goblin(Vector2{0.f, 0.f}, enemyTextures.at(0), enemyTextures.at(1), &knight);
 
     // todo: find way to define a slime enemy will always use those two textures as idle and run
-    Enemy slime(Vector2{500.f, 500.f}, enemyTextures.at(2), enemyTextures.at(3));
-    Enemy slime1(Vector2{800.f, 800.f}, enemyTextures.at(2), enemyTextures.at(3));
-    Enemy slime2(Vector2{1000.f, 1000.f}, enemyTextures.at(2), enemyTextures.at(3));
+    //Enemy slime(Vector2{500.f, 500.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
+    //Enemy slime1(Vector2{800.f, 800.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
+    //Enemy slime2(Vector2{1000.f, 1000.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
 
     // using vector here to add enemies later
     std::vector<Enemy*> enemies = {
-        &goblin,
-        &slime,
-        &slime1,
-        &slime2};
+        &goblin
+       // &slime,
+       // &slime1,
+        //&slime2
+    };
 
-    for (auto enemy : enemies)
-    {
-        enemy->setTarget(&knight);
-    }
+    // unnecessary, put this in declaration of an enemy
+    //for (auto enemy : enemies)
+    //{
+    //    enemy->setTarget(&knight);
+    //}
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -104,6 +107,7 @@ int main()
             knight.GetWorldPos().x + windowDimemsion > mapBG.width * aScale ||
             knight.GetWorldPos().y + windowDimemsion > mapBG.height * aScale)
         {
+            // undo movement if out of bounds for current frame
             knight.undoMovement();
         }
 
@@ -143,6 +147,12 @@ int main()
 
         // Win game state
         // Vector is empty
+        if (enemies.empty())
+        {
+            int fontsize = 40;
+            DrawText("WINNER!", (windowDimemsion / 2.f) - (MeasureText("WINNER!", fontsize) / 2.f) - 2.f, (windowDimemsion / 2.f)  + 2.f, fontsize + 1.f, BLACK);
+            DrawText("WINNER!", (windowDimemsion / 2.f) -  MeasureText("WINNER!", fontsize) / 2.f, windowDimemsion / 2.f, fontsize, GOLD);
+        }
 
         EndDrawing();
     }

@@ -88,6 +88,7 @@ void Character::Tick(float deltaTime)
 
     DrawTexturePro(weapon, source, dest, origin, rotation, WHITE);
 
+    // debug display collision box for weapon
     /*DrawRectangleLines(
         weaponCollisionRec.x,
         weaponCollisionRec.y,
