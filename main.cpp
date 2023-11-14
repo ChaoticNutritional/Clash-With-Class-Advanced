@@ -57,16 +57,16 @@ int main()
     Enemy goblin(Vector2{0.f, 0.f}, enemyTextures.at(0), enemyTextures.at(1), &knight);
 
     // todo: find way to define a slime enemy will always use those two textures as idle and run
-    //Enemy slime(Vector2{500.f, 500.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
-    //Enemy slime1(Vector2{800.f, 800.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
-    //Enemy slime2(Vector2{1000.f, 1000.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
+    Enemy slime(Vector2{500.f, 500.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
+    Enemy slime1(Vector2{800.f, 800.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
+    Enemy slime2(Vector2{1000.f, 1000.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
 
     // using vector here to add enemies later
     std::vector<Enemy*> enemies = {
-        &goblin
-       // &slime,
-       // &slime1,
-        //&slime2
+        &goblin,
+        &slime, 
+        &slime1,
+        &slime2
     };
 
     // unnecessary, put this in declaration of an enemy

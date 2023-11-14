@@ -111,6 +111,10 @@ void Enemy::DashState(float deltaTime, Vector2 targetPos)
 void Enemy::StartDash()
 {
     //DEBUGGING: std::cout << "Initiating dash...." << std::endl;
+
+    // 
+    Vector2* pos = new Vector2(target->GetScreenPos());
+
     currentState = EnemyState::Dashing;
     targetPos = Vector2Add(target->GetScreenPos(), Vector2Scale(Vector2Subtract(target->GetScreenPos(), GetScreenPos()), 1.5f));//Vector2Scale(target->GetScreenPos(), 1.5f);
     //updateTime *= .5f;
