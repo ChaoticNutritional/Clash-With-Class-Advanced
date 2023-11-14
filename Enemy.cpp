@@ -28,12 +28,12 @@ void Enemy::Tick(float deltaTime)
     switch (currentState)
     {
         case EnemyState::Chasing:
-            std::cout << "Switch to chasing...." << std::endl;
+            //DEBUGGING: std::cout << "Switch to chasing...." << std::endl;
             ChaseState(deltaTime);
             break;
              
         case EnemyState::Dashing:
-            std::cout << "Switch to dashing...." << std::endl;
+            //DEBUGGING: std::cout << "Switch to dashing...." << std::endl;
             DashState(deltaTime, targetPos);
             break;
 
@@ -51,8 +51,7 @@ Vector2 Enemy::GetScreenPos()
 
 void Enemy::ChaseState(float deltaTime)
 {
-    std::cout << "Chasing...." << std::endl;
-    // new base state, put everything from Enemy::Tick in here now
+    //DEBUGGING: std::cout << "Chasing...." << std::endl;
 
     // distance to target
     velocity = Vector2Subtract(target->GetScreenPos(), GetScreenPos());
@@ -77,33 +76,33 @@ void Enemy::ChaseState(float deltaTime)
 
     BaseCharacter::Tick(deltaTime);
 
-
-    // TODO: move this out of this function!!!
-    // if enemy is standing on player
-    if (CheckCollisionRecs(target->GetCollisionRec(), GetCollisionRec()))
-    {
-        if (!target->damaged)
-        {
-            target->TakeDamage(DPS * deltaTime, GetFrameTime());
-        }
-    }
 }
 
 void Enemy::DashState(float deltaTime, Vector2 targetPos)
 {
     velocity = Vector2Subtract(this->targetPos, GetScreenPos());
-    std::cout << "distance left to dash: " << Vector2Length(velocity) << std::endl;
+    //DEBUGGING: std::cout << "distance left to dash: " << Vector2Length(velocity) << std::endl;
 
        
         // would like to do operator overload... investigate this soon tbd
     if (Vector2Length(velocity) < 20.f)
     {
-        std::cout << "reached dash location...." << std::endl;
+        //DEBUGGING: std::cout << "reached dash location...." << std::endl;
         this->targetPos = target->GetScreenPos();
         currentState = EnemyState::Chasing;
         speed = 3.f;
-        std::cout << "Going back to chase...." << std::endl;
+        //DEBUGGING: std::cout << "Going back to chase...." << std::endl;
         counter = 2.f;
+        //updateTime *= 2.f;
+    }
+
+    // if enemy is standing on player
+    if (CheckCollisionRecs(target->GetCollisionRec(), GetCollisionRec()))
+    {
+        if (!target->damaged)
+        {
+            target->TakeDamage(20);
+        }
     }
 
     BaseCharacter::Tick(deltaTime);
@@ -111,10 +110,10 @@ void Enemy::DashState(float deltaTime, Vector2 targetPos)
 
 void Enemy::StartDash()
 {
-    std::cout << "Initiating dash...." << std::endl;
+    //DEBUGGING: std::cout << "Initiating dash...." << std::endl;
     currentState = EnemyState::Dashing;
     targetPos = Vector2Add(target->GetScreenPos(), Vector2Scale(Vector2Subtract(target->GetScreenPos(), GetScreenPos()), 1.5f));//Vector2Scale(target->GetScreenPos(), 1.5f);
-    //updateTime *= 2.f;
+    //updateTime *= .5f;
     speed = 6.f;
 
     // initiate switch to dash state

@@ -14,6 +14,7 @@ class Character : public BaseCharacter
         float GetHealth() const { return health; };
         bool damaged = false;
         void TakeDamage(float damage, float deltaTime = 0.0f);
+        float invulnTimer = 2.0f;
 
     private:
         Rectangle weaponCollisionRec{};

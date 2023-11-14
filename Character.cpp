@@ -19,6 +19,17 @@ Vector2 Character::GetScreenPos()
 
 void Character::Tick(float deltaTime)
 {
+    if (damaged)
+    {
+        invulnTimer -= deltaTime;
+    }
+
+    if (invulnTimer <= 0.f)
+    {
+        damaged = false;
+        invulnTimer = 2.0f;
+    }
+
     // check if dead
     if (!getAlive()) return;
 
@@ -108,7 +119,6 @@ void Character::TakeDamage(float damage, float deltaTime)
     if(damaged)
     {
         currentColor = normalColor;
-        damaged = false;
     }
 
     if (health <= 0.f)

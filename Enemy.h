@@ -23,7 +23,7 @@ class Enemy : public BaseCharacter
         float DPS{10.f};
 
         // distance from self to target
-        float chaseRadius{100.f};
+        float chaseRadius{125.f};
 
         // counts down until the enemy will dash once within range
         float counter = 2.f;
