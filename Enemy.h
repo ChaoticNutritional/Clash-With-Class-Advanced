@@ -15,7 +15,7 @@ class Enemy : public BaseCharacter
         // static int enemyCount; // unnecessary because use of vector now?
         //void setTarget(Character* aGuy) { target = aGuy; }
         void ChaseState(float deltaTime);
-        void DashState(float deltaTime, Vector2 targetPos);
+        void DashState(float deltaTime);
         void StartDash();
     
     private:

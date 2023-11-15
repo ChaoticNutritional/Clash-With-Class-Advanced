@@ -25,6 +25,13 @@ void BaseCharacter::unloadAllTexts()
     UnloadTexture(idle);
     UnloadTexture(run);
 };
+float BaseCharacter::clampf(float low, float high)
+{
+
+
+    return 0.0f;
+}
+;
 
 void BaseCharacter::Tick(float deltaTime)
 {

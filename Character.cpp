@@ -108,7 +108,7 @@ void Character::Tick(float deltaTime)
         RED);*/
 
     // debugging knight's position on the screen displayed
-    // DrawText(TextFormat("pos: %f %f", worldPos.x, worldPos.y), 0.f, 0.f, 33.f, RED);
+     DrawText(TextFormat("pos: %.2f\n %.2f", worldPos.x, worldPos.y), GetScreenPos().x, GetScreenPos().y, 25.f, GOLD);
 }
 
 void Character::TakeDamage(float damage, float deltaTime)

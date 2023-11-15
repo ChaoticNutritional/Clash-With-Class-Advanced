@@ -16,6 +16,8 @@ class BaseCharacter
         bool getAlive() {return alive;}
         void setAlive(bool youGood) {alive = youGood;}
         void SetColor(Color aColor);
+        //float clamp() // generic type maybe? to clamp vector values too?
+        float clampf(float low, float high);
 
     protected:
         Texture2D run{LoadTexture("characters/knight_run_spritesheet.png")};

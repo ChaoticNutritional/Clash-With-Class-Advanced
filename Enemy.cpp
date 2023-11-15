@@ -22,7 +22,14 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture, Charact
 
 void Enemy::Tick(float deltaTime)
 {
+    // DEBUGGING
+    // line from enemy position to target
     DrawLine(GetScreenPos().x, GetScreenPos().y, target->GetScreenPos().x, target->GetScreenPos().y, RED);
+
+    // Box around target's world position
+    DrawRectangleLines(Vector2Divide(target->GetWorldPos(), target->GetScreenPos()).x, Vector2Divide(target->GetWorldPos(), target->GetScreenPos()).y, 100, 100, GREEN);
+
+    // Box around target position based in screen space
     DrawRectangleLines(targetPos.x, targetPos.y, 100, 100, RED);
 
     switch (currentState)
@@ -34,14 +41,12 @@ void Enemy::Tick(float deltaTime)
              
         case EnemyState::Dashing:
             //DEBUGGING: std::cout << "Switch to dashing...." << std::endl;
-            DashState(deltaTime, targetPos);
+            DashState(deltaTime);
             break;
 
         default:
             ChaseState(deltaTime);
     }
-
-
 }
 
 Vector2 Enemy::GetScreenPos()
@@ -78,13 +83,12 @@ void Enemy::ChaseState(float deltaTime)
 
 }
 
-void Enemy::DashState(float deltaTime, Vector2 targetPos)
+void Enemy::DashState(float deltaTime)
 {
     velocity = Vector2Subtract(this->targetPos, GetScreenPos());
     //DEBUGGING: std::cout << "distance left to dash: " << Vector2Length(velocity) << std::endl;
 
-       
-        // would like to do operator overload... investigate this soon tbd
+    // we've approximately reached our target
     if (Vector2Length(velocity) < 20.f)
     {
         //DEBUGGING: std::cout << "reached dash location...." << std::endl;
@@ -101,7 +105,7 @@ void Enemy::DashState(float deltaTime, Vector2 targetPos)
     {
         if (!target->damaged)
         {
-            target->TakeDamage(20);
+            target->TakeDamage(0);
         }
     }
 
@@ -115,8 +119,10 @@ void Enemy::StartDash()
     // 
     Vector2* pos = new Vector2(target->GetScreenPos());
 
+    std::cout << pos->x << " , " << pos->y << std::endl;
+
     currentState = EnemyState::Dashing;
-    targetPos = Vector2Add(target->GetScreenPos(), Vector2Scale(Vector2Subtract(target->GetScreenPos(), GetScreenPos()), 1.5f));//Vector2Scale(target->GetScreenPos(), 1.5f);
+    targetPos = Vector2Add(*pos, Vector2Scale(Vector2Subtract(*pos, GetScreenPos()), 1.5f));//Vector2Scale(target->GetScreenPos(), 1.5f);
     //updateTime *= .5f;
     speed = 6.f;
 
