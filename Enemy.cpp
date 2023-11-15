@@ -22,6 +22,9 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture, Charact
 
 void Enemy::Tick(float deltaTime)
 {
+    // 
+    DrawRectangleLines(GetScreenPos().x, GetScreenPos().y, 100, 100, VIOLET);
+
     // DEBUGGING
     // line from enemy position to target
     DrawLine(GetScreenPos().x, GetScreenPos().y, target->GetScreenPos().x, target->GetScreenPos().y, RED);
@@ -85,6 +88,7 @@ void Enemy::ChaseState(float deltaTime)
 
 void Enemy::DashState(float deltaTime)
 {
+    targetPos = (Vector2Subtract());
     velocity = Vector2Subtract(this->targetPos, GetScreenPos());
     //DEBUGGING: std::cout << "distance left to dash: " << Vector2Length(velocity) << std::endl;
 
