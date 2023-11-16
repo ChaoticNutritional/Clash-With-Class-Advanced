@@ -52,13 +52,16 @@ int main()
     //TODO
         // location generator
         // Initializiation of enemies can occur while game runs, to add new guys after game start
+        // enemy other collision checker
+    
+    
 
     // I don't want to have to specify one and the one after... ideate on solution for this
     Enemy goblin(Vector2{0.f, 0.f}, enemyTextures.at(0), enemyTextures.at(1), &knight);
 
     // todo: find way to define a slime enemy will always use those two textures as idle and run
         //MULTI ENEMY SETUP
-    /*Enemy slime(Vector2{500.f, 500.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
+    Enemy slime(Vector2{500.f, 500.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
     Enemy slime1(Vector2{800.f, 800.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
     Enemy slime2(Vector2{1000.f, 1000.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
 
@@ -68,17 +71,7 @@ int main()
         &slime, 
         &slime1,
         &slime2
-    };*/
-
-    // SINGLE ENEMY SETUP
-    std::vector<Enemy*> enemies = {
-       &goblin };
-
-    // unnecessary, put this in declaration of an enemy
-    //for (auto enemy : enemies)
-    //{
-    //    enemy->setTarget(&knight);
-    //}
+    };
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
