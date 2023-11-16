@@ -19,6 +19,8 @@ class BaseCharacter
         //float clamp() // generic type maybe? to clamp vector values too?
         float clampf(float low, float high);
 
+        
+
     protected:
         Texture2D run{LoadTexture("characters/knight_run_spritesheet.png")};
         Texture2D idle{LoadTexture("characters/knight_idle_spritesheet.png")};
@@ -26,6 +28,7 @@ class BaseCharacter
         Vector2 onScreenPos{};
         Vector2 worldPos{};
         Vector2 worldPosLastFrame{};
+
         int width{};
         int height{};
         float scale{4.0f};

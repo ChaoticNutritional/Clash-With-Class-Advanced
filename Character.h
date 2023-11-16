@@ -15,6 +15,8 @@ class Character : public BaseCharacter
         bool damaged = false;
         void TakeDamage(float damage, float deltaTime = 0.0f);
         float invulnTimer = 2.0f;
+        Vector2 getVelocity() { return lastVelocity; };
+
 
     private:
         Rectangle weaponCollisionRec{};
@@ -23,7 +25,7 @@ class Character : public BaseCharacter
         Texture2D weapon = LoadTexture("characters/weapon_sword.png");
         float health{100.f};
         float invTimer = 3.0f;
-
+        Vector2 lastVelocity = {};
 };
 
 #endif

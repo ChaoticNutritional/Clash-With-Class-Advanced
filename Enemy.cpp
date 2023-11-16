@@ -88,7 +88,7 @@ void Enemy::ChaseState(float deltaTime)
 
 void Enemy::DashState(float deltaTime)
 {
-    targetPos = (Vector2Subtract());
+    targetPos = Vector2Subtract(targetPos, Vector2Scale(Vector2Normalize(target->getVelocity()), 5.0f));
     velocity = Vector2Subtract(this->targetPos, GetScreenPos());
     //DEBUGGING: std::cout << "distance left to dash: " << Vector2Length(velocity) << std::endl;
 

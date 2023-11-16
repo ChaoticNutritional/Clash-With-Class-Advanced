@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "raylib.h"
+#include "iostream"
 
 Character::Character(int windowWidth, int windowHeight) : winWidth(windowWidth),
                                                           winHeight(windowHeight)
@@ -34,7 +35,7 @@ void Character::Tick(float deltaTime)
     if (!getAlive()) return;
 
     // Check for input
-    if (IsKeyDown(KEY_A))
+    if (IsKeyDown(KEY_A)) 
         velocity.x -= 1.0;
     if (IsKeyDown(KEY_D))
         velocity.x += 1.0;
@@ -42,7 +43,16 @@ void Character::Tick(float deltaTime)
         velocity.y -= 1.0;
     if (IsKeyDown(KEY_S))
         velocity.y += 1.0;
+
+    lastVelocity = velocity;
+    std::cout << "VELOCITY: " << lastVelocity.x << " , " << lastVelocity.y << std::endl;
+    std::cout << "CACHED VELOCITY: " << lastVelocity.x << " , " << lastVelocity.y << std::endl;
+
+    
     BaseCharacter::Tick(deltaTime);
+
+    //std::cout << "VELOCITY 2nd CHECK: " << lastVelocity.x << " , " << lastVelocity.y << std::endl;
+    //std::cout << "CACHED VELOCITY 2nd CHECK: " << lastVelocity.x << " , " << lastVelocity.y << std::endl;
 
     GetMousePosition().x < GetScreenPos().x + static_cast<float>(currentTexture.width) / 2.f ? RightLeft = -1.f : RightLeft = 1.f;
 
