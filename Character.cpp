@@ -23,7 +23,29 @@ void Character::Tick(float deltaTime)
     if (damaged)
     {
         invulnTimer -= deltaTime;
+
+        if (flashed)
+        {
+            currentColor = RED;
+        }
+        else
+        {
+            currentColor = BLANK;
+            currentColor.a += 50.f;
+            currentColor.r += 50.f;
+            currentColor.g += 50.f;
+            currentColor.b += 50.f;
+        }
+
+        flashCounter -= deltaTime;
+
+        if (flashCounter < 0.f)
+        {
+            flashed = !flashed;
+            flashCounter = 0.2f;
+        }
     }
+    else { currentColor = WHITE; }
 
     if (invulnTimer <= 0.f)
     {
@@ -45,10 +67,6 @@ void Character::Tick(float deltaTime)
         velocity.y += 1.0;
 
     lastVelocity = velocity;
-    std::cout << "VELOCITY: " << lastVelocity.x << " , " << lastVelocity.y << std::endl;
-    std::cout << "CACHED VELOCITY: " << lastVelocity.x << " , " << lastVelocity.y << std::endl;
-
-    
     BaseCharacter::Tick(deltaTime);
 
     //std::cout << "VELOCITY 2nd CHECK: " << lastVelocity.x << " , " << lastVelocity.y << std::endl;
@@ -118,18 +136,14 @@ void Character::Tick(float deltaTime)
         RED);*/
 
     // debugging knight's position on the screen displayed
-     DrawText(TextFormat("pos: %.2f\n %.2f", worldPos.x, worldPos.y), GetScreenPos().x, GetScreenPos().y, 25.f, GOLD);
+     //DrawText(TextFormat("pos: %.2f\n %.2f", worldPos.x, worldPos.y), GetScreenPos().x, GetScreenPos().y, 25.f, GOLD);
 }
 
 void Character::TakeDamage(float damage, float deltaTime)
 {
     damaged = true;
     health -= damage;
-
-    if(damaged)
-    {
-        currentColor = normalColor;
-    }
+    currentColor = RED;
 
     if (health <= 0.f)
     {

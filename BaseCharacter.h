@@ -28,6 +28,8 @@ class BaseCharacter
         Vector2 onScreenPos{};
         Vector2 worldPos{};
         Vector2 worldPosLastFrame{};
+        float flashCounter = 0.2f;
+        bool flashed = false;
 
         int width{};
         int height{};

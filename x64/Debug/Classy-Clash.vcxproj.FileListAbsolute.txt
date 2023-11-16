@@ -1,2 +1,3 @@
 C:\Users\jackt\source\repos\Classy-Clash\x64\Debug\Classy-Clash.exe
 C:\Clash-With-Class-Advanced\x64\Debug\Classy-Clash.exe
+C:\Users\Jack\Documents\GitHub\Clash-With-Class-Advanced\x64\Debug\Classy-Clash.exe

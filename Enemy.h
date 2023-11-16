@@ -17,6 +17,8 @@ class Enemy : public BaseCharacter
         void ChaseState(float deltaTime);
         void DashState(float deltaTime);
         void StartDash();
+        bool isDashing() { return currentState == EnemyState::Dashing; };
+        Rectangle boxOfCollision = { 0 };
     
     private:
         Character* target;
@@ -40,6 +42,8 @@ class Enemy : public BaseCharacter
         EnemyState currentState;
         float dashCounter;
         Vector2 lastKnownPosition;
+
+
 };
 
 #endif

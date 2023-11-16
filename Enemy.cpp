@@ -2,8 +2,6 @@
 #include "raymath.h"
 #include <iostream>
 
-
-
 Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture, Character* heroTarget)
 {
     worldPos = pos;
@@ -14,7 +12,7 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture, Charact
     height = currentTexture.height;
     speed = 3.f;
     //enemyCount++; using vector size to keep track of enemies now...
-    float counter = 2.f;
+    float counter = 7.f;
     bool dashing = false;
     target = heroTarget;
     targetPos = target->GetScreenPos();
@@ -22,19 +20,28 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture, Charact
 
 void Enemy::Tick(float deltaTime)
 {
-    // 
-    DrawRectangleLines(GetScreenPos().x, GetScreenPos().y, 100, 100, VIOLET);
+    // DEBUGGING AND TESTING
+    /*
+    //velocity = Vector2Subtract(velocity, Vector2{ boxOfCollision.x, boxOfCollision.y });
+    // DEBUGGING & notes
+    //DrawLine(GetScreenPos().x, GetScreenPos().y, boxOfCollision.x, boxOfCollision.y, BLUE);
 
-    // DEBUGGING
+    // DEBUGGING FOR COLLISION OFFSET TESTING IN PROGRESS
+    //DrawRectangleRec(boxOfCollision, BLUE);
+   
     // line from enemy position to target
-    DrawLine(GetScreenPos().x, GetScreenPos().y, target->GetScreenPos().x, target->GetScreenPos().y, RED);
+    //DrawLine(GetScreenPos().x, GetScreenPos().y, target->GetScreenPos().x, target->GetScreenPos().y, RED);
 
-    // Box around target's world position
-    DrawRectangleLines(Vector2Divide(target->GetWorldPos(), target->GetScreenPos()).x, Vector2Divide(target->GetWorldPos(), target->GetScreenPos()).y, 100, 100, GREEN);
+    // This might be fun to build a minimap in future development...
+        // Box around target's world position
+        //DrawRectangleLines(Vector2Divide(target->GetWorldPos(), target->GetScreenPos()).x, Vector2Divide(target->GetWorldPos(), target->GetScreenPos()).y, 100, 100, GREEN);
 
     // Box around target position based in screen space
-    DrawRectangleLines(targetPos.x, targetPos.y, 100, 100, RED);
-
+    //DrawRectangleLines(targetPos.x, targetPos.y, 100, 100, RED);
+    */
+    velocity = Vector2Add(velocity, Vector2Normalize(Vector2{ boxOfCollision.x, boxOfCollision.y }));
+    
+    // check for collisions between any other enemies...
     switch (currentState)
     {
         case EnemyState::Chasing:
@@ -63,6 +70,16 @@ void Enemy::ChaseState(float deltaTime)
 
     // distance to target
     velocity = Vector2Subtract(target->GetScreenPos(), GetScreenPos());
+    velocity = Vector2Add(velocity, Vector2Normalize(Vector2{boxOfCollision.x, boxOfCollision.y }));
+
+    // if enemy collides with player
+    if (CheckCollisionRecs(target->GetCollisionRec(), GetCollisionRec()))
+    {
+        if (!target->damaged)
+        {
+            target->TakeDamage(5);
+        }
+    }
 
     // if the length of the direction vector from self to player is within the player radius, do <something>
         // todo: Dash attack
@@ -70,6 +87,23 @@ void Enemy::ChaseState(float deltaTime)
     {
         // stop moving
         velocity = {};
+
+        if (flashed)
+        {
+            currentColor = LIGHTGRAY;
+        }
+        else
+        {
+            currentColor = YELLOW;
+        }
+
+        flashCounter -= deltaTime;
+
+        if (flashCounter < 0.f)
+        {
+            flashed = !flashed;
+            flashCounter = 0.2f;
+        }
 
         // wait time until dash
         Enemy::counter -= deltaTime;
@@ -81,6 +115,7 @@ void Enemy::ChaseState(float deltaTime)
             StartDash();
         }
     }
+    else { currentColor = WHITE; }
 
     BaseCharacter::Tick(deltaTime);
 
@@ -90,6 +125,7 @@ void Enemy::DashState(float deltaTime)
 {
     targetPos = Vector2Subtract(targetPos, Vector2Scale(Vector2Normalize(target->getVelocity()), 5.0f));
     velocity = Vector2Subtract(this->targetPos, GetScreenPos());
+    velocity = Vector2Add(velocity, Vector2Normalize(Vector2{ boxOfCollision.x, boxOfCollision.y }));
     //DEBUGGING: std::cout << "distance left to dash: " << Vector2Length(velocity) << std::endl;
 
     // we've approximately reached our target
@@ -100,8 +136,8 @@ void Enemy::DashState(float deltaTime)
         currentState = EnemyState::Chasing;
         speed = 3.f;
         //DEBUGGING: std::cout << "Going back to chase...." << std::endl;
-        counter = 2.f;
-        //updateTime *= 2.f;
+        counter = 1.f;
+        updateTime = 1.f / 12.f;
     }
 
     // if enemy is standing on player
@@ -109,7 +145,7 @@ void Enemy::DashState(float deltaTime)
     {
         if (!target->damaged)
         {
-            target->TakeDamage(0);
+            target->TakeDamage(15);
         }
     }
 
@@ -121,18 +157,14 @@ void Enemy::StartDash()
     //DEBUGGING: std::cout << "Initiating dash...." << std::endl;
 
     // 
-    Vector2* pos = new Vector2(target->GetScreenPos());
+    Vector2 pos = Vector2(target->GetScreenPos());
 
-    std::cout << pos->x << " , " << pos->y << std::endl;
+    //std::cout << pos.x << " , " << pos.y << std::endl;
 
     currentState = EnemyState::Dashing;
-    targetPos = Vector2Add(*pos, Vector2Scale(Vector2Subtract(*pos, GetScreenPos()), 1.5f));//Vector2Scale(target->GetScreenPos(), 1.5f);
-    //updateTime *= .5f;
-    speed = 6.f;
 
-    // initiate switch to dash state
-    // set current state enum to Dash?
-        // handle speed change here?
-        // speed += 10;
-        // runningTime += <amount?>
+    // an extension of 
+    targetPos = Vector2Add(pos, Vector2Scale(Vector2Subtract(pos, GetScreenPos()), 1.5f));//Vector2Scale(target->GetScreenPos(), 1.5f);
+    updateTime *= .5f;
+    speed = 8.f;
 }

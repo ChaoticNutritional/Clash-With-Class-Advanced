@@ -25,6 +25,7 @@ class Character : public BaseCharacter
         Texture2D weapon = LoadTexture("characters/weapon_sword.png");
         float health{100.f};
         float invTimer = 3.0f;
+
         Vector2 lastVelocity = {};
 };
 

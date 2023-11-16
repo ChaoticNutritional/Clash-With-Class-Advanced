@@ -18,7 +18,8 @@ void DrawPlayerHealth(Character knight) {
     DrawRectangle(20, 20, ((knight.GetHealth() * 240) / 100), 5, Color{ 255, 100, 100, 255 });
     DrawText(TextFormat("%.f/100", knight.GetHealth()), 82, 31, 35, GRAY);
     DrawText(TextFormat("%.f/100", knight.GetHealth()), 80, 30, 35, WHITE);
-}
+};
+
 
 // MAIN BEGINS
 int main()
@@ -124,6 +125,44 @@ int main()
         for (int i = 0; i < enemies.size(); i++)
         {
             enemies.at(i)->Tick(GetFrameTime());
+
+            // TODO:
+            // Clunky way to check enemies colliding
+            for (int j = 0; j < enemies.size(); j++)
+            {
+                if (i == j) continue;
+
+                if (i < sizeof(enemies) / sizeof(enemies.at(0) - 1))
+                {
+                    Rectangle boxA = enemies.at(i)->GetCollisionRec();
+                    Rectangle boxB = enemies.at(j)->GetCollisionRec();
+                    if (CheckCollisionRecs(boxA, boxB) && !enemies.at(i)->isDashing())
+                    {
+                        //
+                        enemies.at(i)->boxOfCollision = GetCollisionRec(boxA, boxB);
+                        //enemies.at(i)->undoMovement();
+                    }
+                    else
+                    {
+                        enemies.at(i)->boxOfCollision = { 0 };
+                    }
+                }
+                else
+                {
+                    Rectangle boxA = enemies.at(i)->GetCollisionRec();
+                    Rectangle boxB = enemies.at(j)->GetCollisionRec();
+                    if (CheckCollisionRecs(boxA, boxB) && !enemies.at(i)->isDashing())
+                    {
+                        //enemies.at(i)->undoMovement();
+                        enemies.at(i)->boxOfCollision = GetCollisionRec(boxA, boxB);
+                        //enemies.at(i)->undoMovement();
+                    }
+                    else
+                    {
+                        enemies.at(i)->boxOfCollision = { 0 };
+                    }
+                }
+            }
         }
 
 
