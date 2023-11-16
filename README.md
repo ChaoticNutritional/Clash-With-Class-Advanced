@@ -37,6 +37,12 @@ Initially this program was created in VSCode, but I have since migrated it into 
 
 <DESCRIPTION SOON>
 
+## The player
+
+<DESCRIPTION SOON>
+
+- The player is created by linking 
+
 ## The enemy
 
 <DESCRIPTION SOON>
@@ -50,8 +56,6 @@ Initially this program was created in VSCode, but I have since migrated it into 
 - The current dash implementation of an enemy checks if the enemy crosses the player object (by comparing its collision rectangles) and if there is a collision, the player takes 20 points of damage.
   - In the future, I would like to create additional enemies whose damage value is higher than standard enemies, additionally might have a larger collision box, or a different style of attack.
 
-## The player
+## The screen
 
 <DESCRIPTION SOON>
-
-## The screen
