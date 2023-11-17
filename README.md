@@ -35,17 +35,15 @@ Initially this program was created in VSCode, but I have since migrated it into 
 
 ## The map
 
-<DESCRIPTION SOON>
+:DESCRIPTION SOON:
 
 ## The player
 
-<DESCRIPTION SOON>
-
-- The player is created by linking 
+:DESCRIPTION SOON:
 
 ## The enemy
 
-<DESCRIPTION SOON>
+:DESCRIPTION SOON:
 
 - This is part of where my additional challenges came into play. Initially the Enemies would attempt to deal damage to the player as long as they were standing on them. I wanted to implement a sort of dash attack towards the direction of the player, once the enemy has gotten within an attacking range.
 - To do this, I implemented a state machine pattern within the enemy class so that the enemy would be able to transition between chasing states and dashing states, making use of some set variable to count down time in order to initiate a dash.
@@ -56,6 +54,6 @@ Initially this program was created in VSCode, but I have since migrated it into 
 - The current dash implementation of an enemy checks if the enemy crosses the player object (by comparing its collision rectangles) and if there is a collision, the player takes 20 points of damage.
   - In the future, I would like to create additional enemies whose damage value is higher than standard enemies, additionally might have a larger collision box, or a different style of attack.
 
-## The screen
+## KNOWN ISSUES:
 
-<DESCRIPTION SOON>
+- Sometimes the enemies collide with each other and have a difficult time of getting 'un-collided'. I've been looking for a more elegant solution to this problem, but I think I may need some more time to implement this functionality.
