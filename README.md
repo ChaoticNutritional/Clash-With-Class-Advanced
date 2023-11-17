@@ -10,18 +10,18 @@ Initially this program was created in VSCode, but I have since migrated it into 
 ## TODO
 
 - Invincible time & color flash
-  ~~- I was in the process of working out a way to set the player status to invincible and flash white when taking damage~~ // Invincible time set, but no color flash yet
-  - Color Flash
+  ~~- I was in the process of working out a way to set the player status to invincible and flash white when taking damage~~ 
+  ~~- Color Flash~~
 
 - Enemy variants
   - I want to add additional variants of enemies without the addition of new art assets. I'd like to indicate color representing enemy challenge rating (health total) // the methods for altering texture colors using raylib alone is difficult, but I'm wondering if I might be able to use one of the other graphics libraries to achieve the same goal
 
 ~~- Change enemy damage behavior (P1)~~ // Initial phase completed
-  - Currently enemies produce continuous damage when contact is made with the player. When finished with current changes enemy behavior should produce the following: (Please excuse nebulous language)
-    - Enemies will reach acceptable follow radius distance
-    - Perform charge animation. Towards the end of charge time, enemy will store a reference to the player's position in world space
-    - Will dash at faster speed towards locked location of player
-    - Return to chase after brief pause
+  ~~- Currently enemies produce continuous damage when contact is made with the player. When finished with current changes enemy behavior should produce the following: (Please excuse nebulous language)~~
+   ~~- Enemies will reach acceptable follow radius distance~~
+    ~~- Perform charge animation. Towards the end of charge time, enemy will store a reference to the player's position in world space~~
+    ~~- Will dash at faster speed towards locked location of player~~
+    ~~- Return to chase after brief pause~~
    
 - Localized character checking // todo
   - Currently there are several instances where we check for collisions of objects regardless of their proximity, such as when the player "attacks", we check if the sword collision rec overlaps with an enemy collision rec. This is unnecessary if we created a localized check first in a grid system based on where the character is currently. If we only check entities who exist in a set of nearby grid squares to the character, we can optimize these collision checks.
