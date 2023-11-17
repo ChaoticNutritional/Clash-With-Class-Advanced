@@ -25,7 +25,7 @@ void Enemy::Tick(float deltaTime)
     /*
     //velocity = Vector2Subtract(velocity, Vector2{ boxOfCollision.x, boxOfCollision.y });
     // DEBUGGING & notes
-    //DrawLine(GetScreenPos().x, GetScreenPos().y, boxOfCollision.x, boxOfCollision.y, BLUE);
+    DrawLine(GetScreenPos().x, GetScreenPos().y, boxOfCollision.x, boxOfCollision.y, BLUE);
 
     // DEBUGGING FOR COLLISION OFFSET TESTING IN PROGRESS
     //DrawRectangleRec(boxOfCollision, BLUE);

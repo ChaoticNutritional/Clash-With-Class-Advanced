@@ -7,31 +7,32 @@ This program makes use of the [Raylib library](https://www.raylib.com/) which pa
 
 Initially this program was created in VSCode, but I have since migrated it into development in Visual Studio 2019 (hence the branch name) which is now the primary build going forwards.
 
+## Clash With Class (Advanced)
+![Clash With Class game preview](preview.png)
+
+The goal of the game is to find and destroy all of the enemy monsters in the scene. Be quick, as additional enemies will spawn if you're not fast enough!
+
+This program makes use of inheritance and polymorphism to create variations on a Base Character object in order to create interations in a game space world. Primarily the Base Character function Tick() drives the movement in each frame, updating how each object is drawn in the space. The additional functionalities unique to each individual object is further defined in their own classes. 
+
 ## TODO
 
-- Invincible time & color flash
-  ~~- I was in the process of working out a way to set the player status to invincible and flash white when taking damage~~ 
-  ~~- Color Flash~~
+- ~~Invincible time & color flash~~ :white_check_mark:
+  - I was in the process of working out a way to set the player status to invincible and flash white when taking damage :heavy_check_mark:
+  - Color Flash:heavy_check_mark:
 
 - Enemy variants
   - I want to add additional variants of enemies without the addition of new art assets. I'd like to indicate color representing enemy challenge rating (health total) // the methods for altering texture colors using raylib alone is difficult, but I'm wondering if I might be able to use one of the other graphics libraries to achieve the same goal
 
-~~- Change enemy damage behavior (P1)~~ // Initial phase completed
-  ~~- Currently enemies produce continuous damage when contact is made with the player. When finished with current changes enemy behavior should produce the following: (Please excuse nebulous language)~~
-   ~~- Enemies will reach acceptable follow radius distance~~
-    ~~- Perform charge animation. Towards the end of charge time, enemy will store a reference to the player's position in world space~~
-    ~~- Will dash at faster speed towards locked location of player~~
-    ~~- Return to chase after brief pause~~
+- ~~Change enemy damage behavior~~  :white_check_mark:
+  - Currently enemies produce continuous damage when contact is made with the player. When finished with current changes enemy behavior should produce the following: (Please excuse nebulous language):heavy_check_mark:
+  - Enemies will reach acceptable follow radius distance:heavy_check_mark:
+    - Perform charge animation. Towards the end of charge time, enemy will store a reference to the player's position in world space:heavy_check_mark:
+    - Will dash at faster speed towards locked location of player :heavy_check_mark:
+    - Return to chase after brief pause :heavy_check_mark:
    
 - Localized character checking // todo
   - Currently there are several instances where we check for collisions of objects regardless of their proximity, such as when the player "attacks", we check if the sword collision rec overlaps with an enemy collision rec. This is unnecessary if we created a localized check first in a grid system based on where the character is currently. If we only check entities who exist in a set of nearby grid squares to the character, we can optimize these collision checks.
   - To do this, my plan is to implement a mapwide grid for testing and detection of where the player is. We can then check the adjacent grid squares for enemies or other collide-ables. Any objects not present in adjacent squares can be ignored from checks.
-
-## The Program explained
-
-<DESCRIPTION SOON>
-
-- This program makes use of inheritance and polymorphism to create variations on a Base Character object in order to create interations in a game space world. Primarily the Base Character function Tick() drives the movement in each frame, updating how each object is drawn in the space. The additional functionalities unique to each individual object is further defined in their own classes. 
 
 ## The map
 
@@ -54,6 +55,5 @@ Initially this program was created in VSCode, but I have since migrated it into 
 - The current dash implementation of an enemy checks if the enemy crosses the player object (by comparing its collision rectangles) and if there is a collision, the player takes 20 points of damage.
   - In the future, I would like to create additional enemies whose damage value is higher than standard enemies, additionally might have a larger collision box, or a different style of attack.
 
-## KNOWN ISSUES:
-
+## KNOWN ISSUES
 - Sometimes the enemies collide with each other and have a difficult time of getting 'un-collided'. I've been looking for a more elegant solution to this problem, but I think I may need some more time to implement this functionality.
