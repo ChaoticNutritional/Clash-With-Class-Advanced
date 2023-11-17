@@ -17,6 +17,7 @@ class Enemy : public BaseCharacter
         void ChaseState(float deltaTime);
         void DashState(float deltaTime);
         void StartDash();
+        void SetWorldPos(Vector2 worldPos) { this->worldPos = worldPos; };
         bool isDashing() { return currentState == EnemyState::Dashing; };
         Rectangle boxOfCollision = { 0 };
     

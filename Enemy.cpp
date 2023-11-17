@@ -12,11 +12,12 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture, Charact
     height = currentTexture.height;
     speed = 3.f;
     //enemyCount++; using vector size to keep track of enemies now...
-    float counter = 7.f;
+    float counter = .7f;
     bool dashing = false;
     target = heroTarget;
     targetPos = target->GetScreenPos();
 }
+
 
 void Enemy::Tick(float deltaTime)
 {
@@ -39,7 +40,7 @@ void Enemy::Tick(float deltaTime)
     // Box around target position based in screen space
     //DrawRectangleLines(targetPos.x, targetPos.y, 100, 100, RED);
     */
-    velocity = Vector2Add(velocity, Vector2Normalize(Vector2{ boxOfCollision.x, boxOfCollision.y }));
+    //velocity = Vector2Add(velocity, Vector2Normalize(Vector2{ boxOfCollision.x, boxOfCollision.y }));
     
     // check for collisions between any other enemies...
     switch (currentState)
@@ -70,7 +71,7 @@ void Enemy::ChaseState(float deltaTime)
 
     // distance to target
     velocity = Vector2Subtract(target->GetScreenPos(), GetScreenPos());
-    velocity = Vector2Add(velocity, Vector2Normalize(Vector2{boxOfCollision.x, boxOfCollision.y }));
+
 
     // if enemy collides with player
     if (CheckCollisionRecs(target->GetCollisionRec(), GetCollisionRec()))
@@ -125,7 +126,7 @@ void Enemy::DashState(float deltaTime)
 {
     targetPos = Vector2Subtract(targetPos, Vector2Scale(Vector2Normalize(target->getVelocity()), 5.0f));
     velocity = Vector2Subtract(this->targetPos, GetScreenPos());
-    velocity = Vector2Add(velocity, Vector2Normalize(Vector2{ boxOfCollision.x, boxOfCollision.y }));
+
     //DEBUGGING: std::cout << "distance left to dash: " << Vector2Length(velocity) << std::endl;
 
     // we've approximately reached our target

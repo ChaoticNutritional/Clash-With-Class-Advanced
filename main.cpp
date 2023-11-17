@@ -11,14 +11,31 @@
 
 // fun but inefficient... read documentation of RLAPI for better alternative
 void DrawPlayerHealth(Character knight) {
-    DrawRectangle(15, 15, 250.f, 60.f, GOLD);
-    DrawRectangle(20, 20, 240, 50, BLACK);
-    DrawRectangle(20, 20, (knight.GetHealth() * 240) / 100, 50, RED);
-    DrawRectangle(20, 60, ((knight.GetHealth() * 240) / 100), 10, Color{ 200, 0, 0, 255 });
-    DrawRectangle(20, 20, ((knight.GetHealth() * 240) / 100), 5, Color{ 255, 100, 100, 255 });
+    DrawRectangle(15, 15, 200.f, 40.f, GOLD);
+    DrawRectangle(20, 20, 190, 30, BLACK);
+    DrawRectangle(20, 20, (knight.GetHealth() * 190) / 100, 30, RED);
+    DrawRectangle(20, 40, ((knight.GetHealth() * 190) / 100), 10, Color{ 200, 0, 0, 255 });
+    DrawRectangle(20, 20, ((knight.GetHealth() * 190) / 100), 5, Color{ 255, 100, 100, 255 });
     DrawText(TextFormat("%.f/100", knight.GetHealth()), 82, 31, 35, GRAY);
     DrawText(TextFormat("%.f/100", knight.GetHealth()), 80, 30, 35, WHITE);
 };
+
+// create a random Vector2 value with components within range of floats:
+// mapBG. width * aScale is max range for X
+// mapBG. height * aScale is maxRange for Y
+// float randx = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) * (mapbg.width * scale);
+// float randx = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) * (mapbg.height * scale);
+
+Vector2 randVectorWithinMap(Texture2D map, float scale)
+{
+    float randX = static_cast<float>(rand()) / static_cast<float> (RAND_MAX) * (map.width * scale);
+    float randY = static_cast<float>(rand()) / static_cast<float> (RAND_MAX) * (map.height * scale);
+
+    std::cout << "X: " << randX << "  Y: " << randY << std::endl;
+    return Vector2{ randX, randY };
+}
+
+
 
 
 // MAIN BEGINS
@@ -56,23 +73,15 @@ int main()
         // enemy other collision checker
     
     
-
-    // I don't want to have to specify one and the one after... ideate on solution for this
-    Enemy goblin(Vector2{0.f, 0.f}, enemyTextures.at(0), enemyTextures.at(1), &knight);
-
-    // todo: find way to define a slime enemy will always use those two textures as idle and run
-        //MULTI ENEMY SETUP
-    Enemy slime(Vector2{500.f, 500.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
-    Enemy slime1(Vector2{800.f, 800.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
-    Enemy slime2(Vector2{1000.f, 1000.f}, enemyTextures.at(2), enemyTextures.at(3), &knight);
-
     // using vector here to add enemies later
-    std::vector<Enemy*> enemies = {
-        &goblin,
-        &slime, 
-        &slime1,
-        &slime2
-    };
+    std::vector<Enemy*> enemies = { };
+    for (int i = 0; i < 4; i++)
+    {
+        int randex = rand() % 2 * 2;
+        enemies.push_back(new Enemy(randVectorWithinMap(mapBG, aScale), enemyTextures.at(randex), enemyTextures.at(randex + 1), &knight));
+    }
+
+    float reinforcementsCounter = 15.0f;
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -140,7 +149,7 @@ int main()
                     {
                         //
                         enemies.at(i)->boxOfCollision = GetCollisionRec(boxA, boxB);
-                        //enemies.at(i)->undoMovement();
+                        enemies.at(i)->undoMovement();
                     }
                     else
                     {
@@ -155,7 +164,7 @@ int main()
                     {
                         //enemies.at(i)->undoMovement();
                         enemies.at(i)->boxOfCollision = GetCollisionRec(boxA, boxB);
-                        //enemies.at(i)->undoMovement();
+                        enemies.at(i)->undoMovement();
                     }
                     else
                     {
@@ -183,6 +192,14 @@ int main()
 
         // Stylized Health Bar NEEDS OPTIMIZATION
         DrawPlayerHealth(knight);
+
+        reinforcementsCounter -= GetFrameTime();
+
+        if (reinforcementsCounter <= 0.f)
+        {
+            enemies.push_back(new Enemy(randVectorWithinMap(mapBG, aScale), enemyTextures.at(0), enemyTextures.at(1), &knight));
+            reinforcementsCounter = 7.0f;
+        }
 
         // Win game state
         // Vector is empty

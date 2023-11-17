@@ -1,6 +1,2 @@
-﻿  Character.cpp
-C:\Users\Jack\Documents\GitHub\Clash-With-Class-Advanced\Character.cpp(34,35): warning C4244: '+=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\Jack\Documents\GitHub\Clash-With-Class-Advanced\Character.cpp(35,35): warning C4244: '+=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\Jack\Documents\GitHub\Clash-With-Class-Advanced\Character.cpp(36,35): warning C4244: '+=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\Jack\Documents\GitHub\Clash-With-Class-Advanced\Character.cpp(37,35): warning C4244: '+=': conversion from 'float' to 'unsigned char', possible loss of data
+﻿  Enemy.cpp
   Classy-Clash.vcxproj -> C:\Users\Jack\Documents\GitHub\Clash-With-Class-Advanced\x64\Debug\Classy-Clash.exe
