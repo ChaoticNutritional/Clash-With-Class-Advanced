@@ -18,15 +18,15 @@ This program makes use of inheritance and polymorphism to create variations on a
 
 - ~~Invincible time & color flash~~ :white_check_mark:
   - I was in the process of working out a way to set the player status to invincible and flash white when taking damage :heavy_check_mark:
-  - Color Flash:heavy_check_mark:
+  - Color Flash :heavy_check_mark:
 
 - Enemy variants
   - I want to add additional variants of enemies without the addition of new art assets. I'd like to indicate color representing enemy challenge rating (health total) // the methods for altering texture colors using raylib alone is difficult, but I'm wondering if I might be able to use one of the other graphics libraries to achieve the same goal
 
 - ~~Change enemy damage behavior~~  :white_check_mark:
-  - Currently enemies produce continuous damage when contact is made with the player. When finished with current changes enemy behavior should produce the following: (Please excuse nebulous language):heavy_check_mark:
-  - Enemies will reach acceptable follow radius distance:heavy_check_mark:
-    - Perform charge animation. Towards the end of charge time, enemy will store a reference to the player's position in world space:heavy_check_mark:
+  - Currently enemies produce continuous damage when contact is made with the player. When finished with current changes enemy behavior should produce the following: (Please excuse nebulous language) :heavy_check_mark:
+  - Enemies will reach acceptable follow radius distance :heavy_check_mark:
+    - Perform charge animation. Towards the end of charge time, enemy will store a reference to the player's position in world space :heavy_check_mark:
     - Will dash at faster speed towards locked location of player :heavy_check_mark:
     - Return to chase after brief pause :heavy_check_mark:
    
